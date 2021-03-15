@@ -1,0 +1,67 @@
+%LTeX: language=de-DE
+\chapter{Problemstellung}
+    % Wichtige Kenngrößen zu im Handel erhältlichen Lüftern sind unter Anderem Volumenstrom und statischer Druck. Ersteres
+    % ist ein Maß für die je Zeiteinheit geförderte Luftmenge und wird häufig in \(\frac{m^3}{h}\) angegeben. Letzteres
+    % gibt den 
+
+    Massenbilanz: angenommen wird, dass zu jedem Zeitpunkt die gleiche Masse angesaugt wie ausgeströmt wird. Diese Annahme
+    resultiert aus zu erwartenden Mach-Zahlen deutlich unter \( 0,3 \) und damit verbundener zu vernachlässigend geringer
+    Dichteänderung des Mediums. Mit entgegen gesetzten Vorzeichen für ein- und austretende Massen ergibt sich:
+    \begin{equation}
+        \frac{dM}{dt} = \dot{m_1} + \dot{m_2} = 0
+    \end{equation}
+
+    Hierbei ist die zeitliche Änderung der Einzelmasse abhängig der Dichte \(\rho\) des Fluids, der durchströmten Fläche
+    \(A\) und dem Linienelement entlang eines Stromfadens \(s\). Dies führt zu
+    \begin{equation}
+        \dot{m} = \rho A \frac{\partial s}{\partial t} \qquad \text{mit} \qquad \frac{\partial s}{\partial t} = c
+    \end{equation}
+
+    \textbf{Reynolds-Zahl}
+    \begin{equation}
+        Re = \frac{\nu}{c \cdot d}
+    \end{equation}
+    mit der charakteristischen Länge \(d\), der dynamischen Viskosität \(\nu\) und der geschwindigkeit entlang des Stromfadens \(c\).
+    \par\medskip
+    \textbf{Bernoulli} (Energieform)
+    \begin{equation}
+        \frac{1}{2} \rho_1 c_1^2 + \rho_1 gh_1 + P_1 = \frac{1}{2} \rho_2 c_2^2 + \rho_2 gh_2 + P_2 + \Delta P_R + \Delta P_F
+    \end{equation}
+    bzw. in vereinfachter Form mit der Annahme, dass Druckverluste durch Reibung vernachlässigt werden können, \(h_1 = h_2\) gilt
+    und die Dichte \(\rho\) an jeder Stelle gleich ist
+    \begin{equation}
+        \frac{1}{2} \rho c_1^2 + P_1 = \frac{1}{2} \rho c_2^2 + P_2 + \Delta P_F
+        \label{eq:bernoulli energiegleichung vereinfacht}
+    \end{equation}
+
+    Die ersten beiden Terme in \cref{eq:bernoulli energiegleichung vereinfacht} geben den dynamischen Druck \(P_d\) und den statischen Druck \(P_s\)
+    jeweils an der Stelle 1. Der dritte und vierte Term respektive die jeweiligen Drücke an der Stelle 2. Der letzte Term
+    bildet den Druckverlust des Systems bedingt durch geometrische Gegebenheiten ab.\par
+    \begin{equation}
+        \Delta P_F = \zeta \cdot \frac{1}{2}\rho c_2^2
+    \end{equation}
+    \par\medskip
+    \textbf{Kontinuität}
+    \begin{equation}
+        \rho_1 c_1 A_1 = \rho_2 c_2 A_2 = \dot{m} = konst.
+    \end{equation}
+    \par\medskip
+    Was zum \textbf{Volumenstrom} führt
+    \begin{equation}
+        \dot{V_i} = c_i \cdot A_i
+    \end{equation}
+    \par\medskip
+    \textbf{Navier-Stokes}
+    \begin{equation}
+        -\vec{\nabla} P + \eta\vec{\nabla}^2\vec{c} + \rho\vec{f} = \rho \left(\frac{\partial\vec{c}}{\partial t} + \left(\vec{c} \cdot \vec{\nabla}\right) \cdot \vec{c}\right)
+    \end{equation}
+    Vereinfachte Form mit
+    \begin{itemize}
+        \item Statisches Fluid: \(\frac{\partial \vec{c}}{\partial t} = \vec{0}\)
+        \item Fehlen äußerer Kräfte: \(\vec{f} = \vec{0}\)
+        \item Vernachlässigung innerer Reibung: \(\eta\vec{\nabla}^2\vec{c} = \vec{0}\)
+    \end{itemize}
+    \medskip
+    \begin{equation}
+        -\vec{\nabla}P = \rho \left(\vec{c} \cdot \vec{\nabla}\right) \cdot \vec{c}
+    \end{equation}
