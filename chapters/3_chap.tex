@@ -1,2 +1,106 @@
 %LTeX: language=de-DE
 \chapter{Beispielrechnung und Simulation}
+    Zur Simulation wurde ein Lüfter des Herstellers \textit{Papst} aus der Serie \textit{4414F}\cite{Papst.4414F.Luefter.2021} mit einem Volumenstrom
+    von \SI{0,0474}{\frac{m^3}{s}} (frei blasend) jeweils an einem Diffusor und einer Düse betrachtet. Geometrischer Parameter
+    sind Öffnungswinkel und Verjüngungswinkel \(\alpha\) des Diffusors bzw. der Düse bezogen auf die Symmetrieachse.
+    Alle Körper sind rotationssymmetrisch und haben eine Länge von \SI{400}{mm} mit einem Eingangsdurchmesser von \SI{120}{mm}
+    (vgl. \cref{fig:zeichnung diffusor,fig:zeichnung duese}).
+
+    Die verwendete CAD- und FEM-Software ist Solidworks des französischen Entwicklers \textit{Dassault Systèmes} und das integrierte
+    Zusatzmodul \textit{Flow Simulation}\cite{numerical.basis.solidworks.flow.simulation.2021}.
+
+    Randbedingungen aller Simulationen waren ideale -- reibungsfreie und adiabate -- Wände. Weiter soll der Volumenstrom durch
+    die gesamte Eingangsfläche gegen einen Umgebungsdruck von \SI{101325}{Pa} ausblasen.
+    
+    Es wurden für die verschiedenen Geometrien jeweils zwei Simulationskampagnen mit verschiedenen Berechnungszielen durchgeführt.
+    Die erste Kampagne sollte eine qualitative Aussage über das Strömungs- und Druckverhalten der verschiedenen Körper ermöglichen.
+    Hierzu wurde jeweils ein Geschwindigkeits- und ein Druckprofil im Mittenschnitt der Körper erstellt.
+    Aus \cref{eq:zeta} geht hervor, dass der Druckverlust \(\Delta P_F\) sich quadratisch-proportional zur Strömungsgeschwindigkeit verhält.
+    Es lag also nahe, eine weitere Kampagne durchzuführen, um diesen Einfluss zu untersuchen.
+    
+    So wurde einerseits der Volumenstrom schrittweise von \SI{0}{\frac{m^3}{s}} bis \SI{0,5}{\frac{m^3}{s}} erhöht, als auch
+    die Winkel von \SI{2}{\degree} bis \SI{10}{\degree} in Schritten von \SI{2}{\degree} für den Diffusor und von \SI{0,5}{\degree}
+    bis \SI{-5}{\degree} in Schritten von \SI{0,5}{\degree} für die Düse variiert. Um den Effekt des Öffnungswinkels auf den
+    Druckwiderstand etwas weiter zu unterstreichen wurde im Falle des Diffusors zusätzlich eine Simulation für einen deutlich
+    zu groß gewählten Öffnungswinkel von \SI{25}{\degree} durchgeführt.
+
+    Da sich der Querschnitt in allen Fällen kontinuierlich ändert, wurde für die Bezugsgeschwindigkeit \(c\) in \cref{eq:kontinuitaetsgleichung volumen}
+    als Berechnungsziel die Globale mittlere Geschwindigkeit gewählt. Weiter wurden der Totaldruck jeweils an Eingang und
+    Ausgang ermittelt, um aus der Differenz \(\Delta P\) zu bilden.
+
+    \section{Diffusor}
+        Ein Diffusor wird in vielen technischen Bereichen eingesetzt, um den Luftstrom zu verzögern und/oder Druck rück zu gewinnen.
+        Düsentriebwerke etwa benötigen zum Betrieb Luftsauerstoff in der Brennkammer. Hier ist es von Nachteil, wenn es aufgrund von
+        Strömungen im Überschallbereich zu Stoßwellen kommt. Schlimmstenfalls kann es zu permanenten Beschädigungen des Triebwerks kommen.
+        Um dem zu entgegnen werden sich aufweitende Kavitäten nahe dem Kompressor eingesetzt, um das einströmende Medium auf Mach < 1 abzubremsen, bevor es
+        in die Brennkammer eingeleitet wird. Doch auch in der Gebäude- oder Bauteilekühlung ist es mitunter von Vorteil etwa vor einem
+        Kühlgitter für einen Druckrückgewinn zu sorgen, um den zur Kühlung notwendigen Volumenstrom aufrechtzuerhalten.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=.8\textwidth]{SW_sim/results/diff_2deg.jpg}
+            \caption[Geschwindigkeits- und Druckprofil am Diffusor bei \(\alpha = \SI{2}{\degree}\)]{Gezeigt wird das Geschwindigkeitsprofil des Luftstromes (schwarze Linien) und der relative Druck bezogen auf den Umgebungsdruck (Farbstufen) entlang des Diffusors bei \(\alpha = \SI{2}{\degree}\).}
+            \label{fig:diff_2deg profil}
+        \end{figure}
+        Um unumkehrbare Druck- und damit Energieverluste zu minimieren\footnote{Kinetische Energie in Verwirblungen ist quasi Ortsfest und damit für den Rest des Systems verloren.} ist allerdings darauf zu achten, dass es nicht zu Strömungswiderständen
+        durch Verwirblungen kommt. Einschlägige Tabellenwerke geben hierbei einen kritischen Öffnungswinkel von \(\approx \SI{10}{\degree}\) an \cite{Hans.Witt.Lueftungstechnik.2021,Grundlagen.der.Ventilatorentechnik.2021}.
+        Mit Blick auf \cref{fig:diff_10deg profil} zeigt sich, dass es nahe der Wandungen am Ausgang des betrachteten Diffusors
+        ab einem Winkel von \SI{10}{\degree} in der Tat zu Ablösungen kommt.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=.8\textwidth]{SW_sim/results/diff_10deg.jpg}
+            \caption[Geschwindigkeits- und Druckprofil am Diffusor bei \(\alpha = \SI{10}{\degree}\)]{Geschwindigkeitsprofil des Luftstromes (schwarze Linien) und der relative Druck bezogen auf den Umgebungsdruck (Farbstufen) entlang des Diffusors bei \(\alpha = \SI{10}{\degree}\). Es ist zu erkennen, dass sich nahe der Wandung entlang des Auslasses Ablösungen beginnen auszubilden.}
+            \label{fig:diff_10deg profil}
+        \end{figure}
+        Der Zusammenhang zwischen Volumenstrom und Druckverlust am Diffusor ist in \cref{fig:anlagenkennlinienfeld Diffusor} dargestellt.
+        Eine steilere Kurve bedeutet einen bei gleich bleibendem Volumenstrom höheren Druckverlust.
+        \begin{figure}[h]
+            \centering
+            \includesvg[inkscapelatex=false, width=.7\linewidth]{scidavis/kennlinienfeldDiffusor.svg}
+            \caption[Anlagenkennlinenfeld Diffusor]{Anlagenkennlinienfeld eines Diffusors unter Variation des Öffnungswinkels.}
+            \label{fig:anlagenkennlinienfeld Diffusor}
+        \end{figure}
+        \Cref{fig:zetas Diffusor} trägt den Druckwiderstandsbeiwert als Funktion des Winkels auf. Auch hier ist der Zusammenhang
+        zwischen dem Öffnungswinkel und dem Druckwiderstandsbeiwert \(\zeta\) deutlich zu erkennen.
+        \begin{figure}[H]
+            \centering
+            \includesvg[inkscapelatex=false, width=.7\linewidth]{scidavis/zetasDiffusor.svg}
+            \caption[Druckverlustbeiwert als Funktion des Öffnungswinkels eines Diffusors]{Verlauf des Druckverlustbeiwertes \(\zeta\) eines Diffusors als Funktion des Öffnungswinkels \(\alpha\).}
+            \label{fig:zetas Diffusor}
+        \end{figure}
+        %
+    \section{Düse}
+        Bei unveränderten Randbedingungen und Zielparametern wurden die obigen Simulationen für einen negativen Öffnungswinkel
+        -- also einem sich verjüngenden Querschnitt -- durch geführt. Nach \cref{eq:kontinuitaetsgleichung volumen} ist zu erwarten,
+        dass sich die Strömungsgeschwindigkeit zu Ausgang hin erhöht und der Druck damit mindert.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=.8\textwidth]{SW_sim/results/duese_-1deg.jpg}
+            \caption[Geschwindigkeits- und Druckprofil an einer Düsenform bei \(\alpha = \SI{-1}{\degree}\)]{Strömungs- und Druckprofil an einer Düsenform mit einem Winkel von \(\alpha \SI{-1}{\degree}\). Analog zu den Profilen des Diffusors stellt sich hier ein umgekehrtes Verhältnis von Druck zu Strömungsgeschwindigkeit ein. Die Farbskala stellt auch hier den Druck relativ zum Umgebungsdruck dar.}
+            \label{fig:duese_-1deg profil}
+        \end{figure}
+        Dieses Verhalten ist in den Profilen aus \Cref{fig:duese_-1deg profil,fig:duese_-5deg profil} ersichtlich. Zu erkennen ist jedoch,
+        dass es hierbei nicht zu Ablösungen und infolgedessen zu unumkehrbaren Druckverlusten kommt.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=.8\textwidth]{SW_sim/results/duese_-5deg.jpg}
+            \caption[Geschwindigkeits- und Druckprofil an einer Düsenform bei \(\alpha = \SI{-5}{\degree}\)]{Weitere verjüngung der Düsenform mit \(\alpha = \SI{-5}{\degree}\).}
+            \label{fig:duese_-5deg profil}
+        \end{figure}
+        \Cref{fig:anlagenkennlinienfeld Duese} zeigt das Kennlinienfeld der unterschiedlichen Düsenwinkel. Auch hier ist ein plötzlicher
+        Anstieg ab einem kritischen Winkel zu erkennen. Hervorzuheben ist allerdings der deutlich stärkere Einfluss des Winkels
+        auf den Druckverlust. \Cref{fig:zetas Duese} trägt die zugehörigen Werte für \(\zeta\) über dem Winkel auf. Hier ist anzumerken,
+        dass die Varianz für \(\zeta\) bei einem Winkel von \SI{-4,5}{\degree} schon so groß wird, dass kaum noch belastbare
+        Aussagen getroffen werden können. Aus diesem Grund wurde darauf verzichtet, den Wert für \(\alpha = \SI{-5}{\degree}\)
+        aufzutragen.
+        \begin{figure}[h]
+            \centering
+            \includesvg[inkscapelatex=false, width=.7\linewidth]{scidavis/kennlinienfeldDuese.svg}
+            \caption[Anlagenkennlinenfeld Duese]{Anlagenkennlinienfeld eines Diffusors unter Variation des Öffnungswinkels.}
+            \label{fig:anlagenkennlinienfeld Duese}
+        \end{figure}
+        \begin{figure}[h]
+            \centering
+            \includesvg[inkscapelatex=false, width=.7\linewidth]{scidavis/zetasDuese.svg}
+            \caption[Druckverlustbeiwert als Funktion des Verjüngungswinkels eine Düse]{Verlauf des Druckverlustbeiwertes \(\zeta\) einer Düse als Funktion ihres Verjüngungswinkels \(\alpha\).}
+            \label{fig:zetas Duese}
+        \end{figure}

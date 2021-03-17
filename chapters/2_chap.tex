@@ -1,2 +1,65 @@
 %LTeX: language=de-DE
 \chapter{Mathematische Grundlagen}
+    Um sich dem eingangs geschilderten Problem adäquat zu nähern, sollen zunächst die mathematischen Grundlagen expliziert werden.
+    \section*{Kontinuität und Massenbilanz}
+        Aus dem Erhaltungssatz der Masse folgt, dass zu jedem Zeitpunkt und durch jeden Querschnitt die gleiche Masse angesaugt
+        wie ausgeströmt wird. Mit entgegen gesetzten Vorzeichen für ein- und austretende Massen ergibt sich:
+        \begin{equation}
+            \frac{dM}{dt} = \dot{m_1} - \dot{m_2} = 0 \qquad \Leftrightarrow \qquad \dot{m_1} = \dot{m_2}
+            \label{eq:massenbilanz}
+        \end{equation}
+
+        Hierbei ist die zeitliche Änderung der Einzelmasse abhängig der Dichte \(\rho\) des Fluids, der durchströmten Fläche
+        \(A\) und dem Linienelement entlang eines Stromfadens \(s\). Dies führt zu
+        \begin{equation}
+            \dot{m} = \rho \dot{V} = \rho A \frac{\partial s}{\partial t} \qquad \text{mit} \qquad \frac{\partial s}{\partial t} = c
+            \label{eq:mass flow}
+        \end{equation}
+        Mit \(\frac{\partial s}{\partial t}\), was bekanntlich einer Geschwindigkeit entspricht, der zusätzlichen Annahme,
+        dass \(\rho_1 = \rho_2\) -- die Dichte sich im Medium also nicht verändert -- und \cref{eq:mass flow} eingesetzt in \cref{eq:massenbilanz}
+        lässt sich
+        \begin{equation}
+            c_1 A_1 = c_2 A_2 = konst
+            \label{eq:kontinuitaetsgleichung volumen}
+        \end{equation}
+        aufschreiben. \Cref{eq:kontinuitaetsgleichung volumen} ist die Kontinuitätsgleichung des Volumens.
+        \subsection*{\textsc{Reynolds}-Zahl}
+        Die dimensionslose \textsc{Reynolds}-Zahl ist ein Maß für die \enquote{Neigung} eines Mediums zu turbulentem Verhalten üblicherweise
+        als Funktion der Strömungsgeschwindigkeit und der um- oder durchströmten Geometrie.
+        \begin{equation}
+            Re = \frac{c \cdot d_h \cdot \rho}{\nu}
+            \label{eq:reynold}
+        \end{equation}
+        mit der charakteristischen Länge \(d_h\), der dynamischen Viskosität \(\nu\), Dichte \(\rho\) und der Geschwindigkeit entlang des Stromfadens \(c\).
+        Dichte und dynamische Viskosität sind materialabhängig während \(d_h\) die Geometrie widerspiegelt.
+        Unterhalb einer kritischen \textsc{Reynolds}-Zahl \(Re_{krit}\) von \(2320\) kann von laminarer Strömung ausgegangen werden \cite{Hans.Witt.Lueftungstechnik.2021}.
+        \par\medskip
+        \section*{\textsc{Bernoulli}}
+        \Cref{eq:bernoulli druck} ist die allgemeine Form \textsc{Bernoullis} Druckgleichung.
+        \begin{equation}
+            \frac{1}{2} \rho_1 c_1^2 + \rho_1 gh_1 + P_1 = \frac{1}{2} \rho_2 c_2^2 + \rho_2 gh_2 + P_2 + \Delta P_R + \Delta P_F
+            \label{eq:bernoulli druck}
+        \end{equation}
+        Unter der Annahme, dass Druckverluste durch Reibung vernachlässigt werden können, \(h_1 = h_2\) gilt und die Dichte
+        \(\rho\) an jeder Stelle gleich ist, kann obige Gleichung vereinfacht aufgeschrieben werden als
+        \begin{equation}
+            \frac{1}{2} \rho c_1^2 + P_1 = \frac{1}{2} \rho c_2^2 + P_2 + \Delta P_F
+            \label{eq:bernoulli energiegleichung vereinfacht}
+        \end{equation}
+
+        Die ersten beiden Terme in \cref{eq:bernoulli energiegleichung vereinfacht} geben den dynamischen Druck \(P_d\) und den statischen Druck \(P_s\)
+        jeweils an der Stelle 1. Der dritte und vierte Term respektive die jeweiligen Drücke an der Stelle 2. Der letzte Term
+        bildet den Druckverlust des Systems bedingt durch geometrische Gegebenheiten ab.\par
+        \begin{equation}
+            \Delta P_{F} = \zeta \cdot \frac{1}{2}\rho c^2 = \zeta \Delta P_{d}
+            \label{eq:zeta}
+        \end{equation}
+        Der dimensionslose Faktor \(\zeta\) ist das Verhältnis aus formbedingtem Druckverlust entlang der Geometrie zu mittlerem
+        dynamischen Druck unmittelbar nach der druckwiderstandbehafteten Geometrie \cite{Grundlagen.der.Ventilatorentechnik.2021}.
+        \Cref{eq:bernoulli energiegleichung vereinfacht,eq:zeta} ergeben
+        \begin{equation}
+            \frac{1}{2} \rho c_1^2 + P_1 = \frac{1}{2} \rho c_2^2 + P_2 + \sum_i \zeta_i \Delta P_{d_i}
+        \end{equation}
+        wobei die Indices \(i\) alle widerstandsbehafteten Teilstrecken zwischen den Stellen \(1\) und \(2\) sind.
+
+        \nocite{Durst.2006.Grundlagen.der.Stroemungsmechanik,Surek.2017.Technische.Stroemungsmechanik}
